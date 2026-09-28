@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{% block title %}Weatherly{% endblock %}</title>
+
+  <!-- Tailwind (CDN — swap for a build step later if desired) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            /* Ocean */
+            ocean: {
+              50:  '#eef9ff', 100: '#d6f0ff', 200: '#aee1ff',
+              400: '#38b6e6', 500: '#0ea5d9', 600: '#0284b8', 700: '#036a91',
+            },
+            /* Sand & sun */
+            sand: {
+              50:  '#fffaf0', 100: '#fff2d8', 200: '#ffe3ad',
+            },
+            sun: {
+              400: '#ffc93c', 500: '#f4a715', 600: '#c97e05',
+            },
+            /* Seafoam */
+            foam: {
+              100: '#e6fbf5', 300: '#9fe8d0', 500: '#34c39a',
+            },
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+          },
+        },
+      },
+    };
+  </script>
+
+  <!-- Inter font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- Custom theme -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}" />
+
+  <!-- Apply the saved unit *before* the CSS paints, to avoid a toggle flash -->
+  <script>
+    (function () {
+      try {
+        var u = localStorage.getItem("weatherly.units") || "metric";
+        document.documentElement.setAttribute("data-units", u);
+      } catch (e) { /* private mode — ignore */ }
+    })();
+  </script>
+
+  {% block head %}{% endblock %}
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header class="app-header">
+      <a href="{{ url_for('main.index') }}" class="brand">
+        <span class="brand-logo">🏖</span>
+        <span>Weatherly</span>
+      </a>
+
+      <div class="header-controls">
+        {% block header_actions %}{% endblock %}
+
+        <div class="unit-toggle" role="group" aria-label="Temperature units">
+          <button type="button" data-units="metric" aria-pressed="false">°C</button>
+          <button type="button" data-units="imperial" aria-pressed="false">°F</button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main content -->
+    <main>
+      {% block content %}{% endblock %}
+    </main>
+  </div>
+
+  <!-- Toast host -->
+  <div id="toast-host" class="fixed bottom-6 right-6 z-[9999] flex flex-col gap-2"></div>
+
+  <!-- JS: order matters — icons.js MUST load before ui.js -->
+  <script src="{{ url_for('static', filename='js/icons.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/api.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/ui.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/search.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/favourites.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+  {% block scripts %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Weatherly — {{ city_name }}{% endblock %}
+
+{% block header_actions %}
+  {% include "partials/_search_bar.html" %}
+{% endblock %}
+
+{% block content %}
+  <a href="{{ url_for('main.index') }}" class="text-sm text-muted">← Back to dashboard</a>
+
+  <div class="grid grid--dashboard mt-2">
+    <div>
+      {% include "partials/_current_card.html" %}
+      {% include "partials/_weekly_grid.html" %}
+    </div>
+    <aside>
+      {% include "partials/_details_stats.html" %}
+    </aside>
+  </div>
+
+  {# Server → client config passes through data-attributes (safe & parsed by the browser). #}
+  <div
+    id="app-config"
+    data-mode="city"
+    data-city-name="{{ city_name }}"
+    data-default-units="{{ default_units }}"
+    hidden
+  ></div>
+{% endblock %}

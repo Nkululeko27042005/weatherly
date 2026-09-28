@@ -1,0 +1,44 @@
+<section id="current-card" class="card card--hero">
+  <div class="flex-between">
+    <div>
+      <div class="muted text-sm uppercase tracking-wider">Now</div>
+      <h1 id="current-city" class="text-3xl font-extrabold mt-1">Loading…</h1>
+      <div id="current-desc" class="muted text-sm mt-1">—</div>
+    </div>
+    <div id="current-icon" class="text-6xl" style="width:1em;height:1em"></div>
+  </div>
+
+  <div class="flex gap-2 mt-2" style="flex-wrap:wrap">
+    <span class="time-chip">🕒 <span id="current-time">--:--</span></span>
+    <span class="time-chip">⟳ Updated <span id="current-updated">—</span></span>
+  </div>
+
+  <div class="flex items-end gap-2 mt-3">
+    <div id="current-temp" class="text-6xl font-extrabold">--°</div>
+    <div class="muted mb-2 text-sm">Feels like <span id="current-feels">--°</span></div>
+  </div>
+
+  <div class="grid grid--stats mt-3">
+    <div class="stat" style="background: rgba(255,255,255,.15);border-color:rgba(255,255,255,.25)">
+      <div class="label" style="color:#fff">Wind</div>
+      <div class="value" style="color:#fff"><span id="current-wind">--</span></div>
+    </div>
+    <div class="stat" style="background: rgba(255,255,255,.15);border-color:rgba(255,255,255,.25)">
+      <div class="label" style="color:#fff">Humidity</div>
+      <div class="value" style="color:#fff"><span id="current-humidity">--</span>%</div>
+    </div>
+    <div class="stat" style="background: rgba(255,255,255,.15);border-color:rgba(255,255,255,.25)">
+      <div class="label" style="color:#fff">Rain (1h)</div>
+      <div class="value" style="color:#fff"><span id="current-rain">0</span> mm</div>
+    </div>
+  </div>
+
+  <div id="sun-arc-host" class="sun-arc"></div>
+
+  <div class="mt-3 flex gap-2" style="flex-wrap:wrap">
+    <button id="add-favourite-btn" class="btn btn--accent">★ Save city</button>
+    <a id="open-detail-link" class="btn btn--ghost" style="color:#fff;border-color:rgba(255,255,255,.4)">
+      Full details →
+    </a>
+  </div>
+</section>

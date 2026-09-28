@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Weatherly — Dashboard{% endblock %}
+
+{% block header_actions %}
+  {% include "partials/_search_bar.html" %}
+{% endblock %}
+
+{% block content %}
+  <div class="grid grid--dashboard">
+    <div>
+      {% include "partials/_current_card.html" %}
+      {% include "partials/_weekly_grid.html" %}
+    </div>
+    <aside>
+      {% include "partials/favourites.html" %}
+      {% include "partials/_details_stats.html" %}
+    </aside>
+  </div>
+
+  <div
+    id="app-config"
+    data-mode="dashboard"
+    data-default-units="{{ config.DEFAULT_UNITS }}"
+    hidden
+  ></div>
+{% endblock %}
